@@ -9,7 +9,7 @@
 
 ## Syntax available
 Available files: 
-- analysis_main.R: two-sample MR and quality checks
+- analysis.R: generation of study databases, two-sample MR and quality checks
 
 
 ## Citation
