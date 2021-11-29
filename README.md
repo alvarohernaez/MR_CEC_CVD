@@ -1,2 +1,16 @@
-# MR_CEC_CVD
-Two-sample Mendelian randomization analysis on the role of cholesterol efflux capacity on cardiovascular disease
+# Manuscript: "Cholesterol efflux capacity and cardiovascular disease: a Mendelian randomization study"
+## Authors
+- María Trinidad Soria-Florido
+- Camille Lassale
+- Roberto Elosua
+- Montserrat Fitó
+- Álvaro Hernáez
+
+
+## Syntax available
+Available files: 
+- analysis_main.R: two-sample MR and quality checks
+
+
+## Citation
+Soria-Florido M.T., Lassale C., Elosua R., Fitó M., Hernáez Á. Cholesterol efflux capacity and cardiovascular disease: a Mendelian randomization study (2021)
