@@ -124,7 +124,7 @@ cec$units<-c("units")
 cec$id<-c("Low-Kam C, J Am Heart Assoc, 2018")
 cec$samplesize<-5293
 cec<-rename.vars(cec,
-                  from=c("ï..rsid","ref_allele","m1_b","m1_se","m1_pval"),
+                  from=c("Ã¯..rsid","ref_allele","m1_b","m1_se","m1_pval"),
                   to=c("SNP","other_allele","beta","se","pval"))
 
 cec_mod1<-cec[,c("Phenotype","SNP","beta","se","eaf","effect_allele","other_allele","pval",
@@ -153,7 +153,6 @@ save(cec_mod1_harm,file="./cec_mod1_harm.RData")
 
 ### OUTCOME: CHD UKBB + CARDIoGRAMplusC4D ('ebi-a-GCST005195'): https://pubmed.ncbi.nlm.nih.gov/29212778/ ###
 ### OUTCOME: Stroke meta-analysis ('ebi-a-GCST005838'): https://pubmed.ncbi.nlm.nih.gov/29531354/ ###
-### OUTCOME: Only ischemic stroke meta-analysis ('ebi-a-GCST005843'): https://pubmed.ncbi.nlm.nih.gov/29531354/ ###
 ### OUTCOME: Heart failure meta-analysis ('ebi-a-GCST009541'): https://pubmed.ncbi.nlm.nih.gov/31919418/ ###
 
 
@@ -164,10 +163,6 @@ save(dat,file="./cec_mod1_chd.RData")
 str_harm<-extract_outcome_data(snps=cec_mod1_harm$SNP,outcomes='ebi-a-GCST005838')
 dat<-harmonise_data(cec_mod1_harm, str_harm, action = 2)
 save(dat,file="./cec_mod1_str.RData")
-
-is_harm<-extract_outcome_data(snps=cec_mod1_harm$SNP,outcomes='ebi-a-GCST005843')
-dat<-harmonise_data(cec_mod1_harm, is_harm, action = 2)
-save(dat,file="./cec_mod1_is.RData")
 
 hf_harm<-extract_outcome_data(snps=cec_mod1_harm$SNP,outcomes='ebi-a-GCST009541')
 dat<-harmonise_data(cec_mod1_harm, hf_harm, action = 2)
@@ -366,10 +361,6 @@ str_harm<-extract_outcome_data(snps=snp_steiger01,outcomes='ebi-a-GCST005838')
 dat<-harmonise_data(cec_mod1_harm, str_harm, action = 2)
 save(dat,file="./cec_mod1_str_steiger01.RData")
 
-is_harm<-extract_outcome_data(snps=snp_steiger01,outcomes='ebi-a-GCST005843')
-dat<-harmonise_data(cec_mod1_harm, is_harm, action = 2)
-save(dat,file="./cec_mod1_is_steiger01.RData")
-
 hf_harm<-extract_outcome_data(snps=snp_steiger01,outcomes='ebi-a-GCST009541')
 dat<-harmonise_data(cec_mod1_harm, hf_harm, action = 2)
 save(dat,file="./cec_mod1_hf_steiger01.RData")
@@ -383,10 +374,6 @@ str_harm<-extract_outcome_data(snps=snp_steiger02,outcomes='ebi-a-GCST005838')
 dat<-harmonise_data(cec_mod1_harm, str_harm, action = 2)
 save(dat,file="./cec_mod1_str_steiger02.RData")
 
-is_harm<-extract_outcome_data(snps=snp_steiger02,outcomes='ebi-a-GCST005843')
-dat<-harmonise_data(cec_mod1_harm, is_harm, action = 2)
-save(dat,file="./cec_mod1_is_steiger02.RData")
-
 hf_harm<-extract_outcome_data(snps=snp_steiger02,outcomes='ebi-a-GCST009541')
 dat<-harmonise_data(cec_mod1_harm, hf_harm, action = 2)
 save(dat,file="./cec_mod1_hf_steiger02.RData")
@@ -396,12 +383,12 @@ save(dat,file="./cec_mod1_hf_steiger02.RData")
 ### TWO-SAMPLE MR ###
 #####################
 
-vars01<-c("cec_mod1","cec_mod1","cec_mod1","cec_mod1",
-          "cec_mod1","cec_mod1","cec_mod1","cec_mod1",
-          "cec_mod1","cec_mod1","cec_mod1","cec_mod1")
-vars02<-c("chd","str","is","hf",
-          "chd_steiger01","str_steiger01","is_steiger01","hf_steiger01",
-          "chd_steiger02","str_steiger02","is_steiger02","hf_steiger02")
+vars01<-c("cec_mod1","cec_mod1","cec_mod1",
+          "cec_mod1","cec_mod1","cec_mod1",
+          "cec_mod1","cec_mod1","cec_mod1")
+vars02<-c("chd","str","hf",
+          "chd_steiger01","str_steiger01","hf_steiger01",
+          "chd_steiger02","str_steiger02","hf_steiger02")
 
 z<-qnorm(1-0.05/2)
 tab<-NULL
@@ -483,11 +470,6 @@ level09<-c("      Main result (MR-RAPS method)")
 level10<-paste("      MR-Egger (intercept test: p-value = ",tab[2,18],")",sep="")
 level11<-c("      Weighted median method")
 level12<-c("      Weighted mode method")
-level15<-c(" Ischemic stroke only")
-level16<-c("      Main result (MR-RAPS method)")
-level17<-paste("      MR-Egger (intercept test: p-value = ",tab[3,18],")",sep="")
-level18<-c("      Weighted median method")
-level19<-c("      Weighted mode method")
 level22<-c(" Heart failure")
 level23<-c("      Main result (MR-RAPS method)")
 level24<-paste("      MR-Egger (intercept test: p-value = ",tab[4,18],")",sep="")
@@ -507,11 +489,6 @@ level09<-paste(tab[2,16],sep="")
 level10<-paste(tab[2,7],sep="")
 level11<-paste(tab[2,10],sep="")
 level12<-paste(tab[2,13],sep="")
-level15<-c(" ")
-level16<-paste(tab[3,16],sep="")
-level17<-paste(tab[3,7],sep="")
-level18<-paste(tab[3,10],sep="")
-level19<-paste(tab[3,13],sep="")
 level22<-c(" ")
 level23<-paste(tab[4,16],sep="")
 level24<-paste(tab[4,7],sep="")
@@ -520,26 +497,22 @@ level26<-paste(tab[4,13],sep="")
 
 jpeg("./results/cec_cvd_mr_ors.jpg", width = 10000, height = 7000, res=1200)
 row_names<-c(level00,level01,level02,level03,level04,level05,level06,level07,level08,level09,level10,
-             level11,level12,level15,level16,level17,level18,level19,level22,level23,level24,level25,level26)
+             level11,level12,level22,level23,level24,level25,level26)
 forestplot(labeltext=row_names,
            c(NA,NA,tab[1,33],tab[1,24],tab[1,27],tab[1,30],tab[5,33],tab[9,33],
              NA,tab[2,33],tab[2,24],tab[2,27],tab[2,30],
-             NA,tab[3,33],tab[3,24],tab[3,27],tab[3,30],
              NA,tab[4,33],tab[4,24],tab[4,27],tab[4,30]),
            c(NA,NA,tab[1,34],tab[1,25],tab[1,28],tab[1,31],tab[5,34],tab[9,34],
              NA,tab[2,34],tab[2,25],tab[2,28],tab[2,31],
-             NA,tab[3,34],tab[3,25],tab[3,28],tab[3,31],
              NA,tab[4,34],tab[4,25],tab[4,28],tab[4,31]),
            c(NA,NA,tab[1,35],tab[1,26],tab[1,29],tab[1,32],tab[5,35],tab[9,35],
              NA,tab[2,35],tab[2,26],tab[2,29],tab[2,32],
-             NA,tab[3,35],tab[3,26],tab[3,29],tab[3,32],
              NA,tab[4,35],tab[4,26],tab[4,29],tab[4,32]),
            lwd.zero=1,
            boxsize = 0.35,
            cex=1,
            txt_gp = fpTxtGp(ticks=gpar(cex=0.8),xlab=gpar(cex=0.8),label=gpar(cex=0.9),title=gpar(cex=1.1)),
            fn.ci_norm = c(fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,
-                          fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,
                           fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,
                           fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI,
                           fpDrawNormalCI,fpDrawNormalCI,fpDrawNormalCI),
@@ -552,7 +525,7 @@ forestplot(labeltext=row_names,
            ci.vertices.height = 0.18,
            xticks = c(0.25,0.5,1,1.5),
            mar=unit(c(-0.1,0.1,0,0.5),"cm"),
-           hrzl_lines=list("9"=gpar(lty=2),"14"=gpar(lty=2),"19"=gpar(lty=2)),
+           hrzl_lines=list("9"=gpar(lty=2),"14"=gpar(lty=2),
            clip=c(0.18,1.51),
            xlab = "Disease risk (odds ratio [95% CI])")
 dev.off()
